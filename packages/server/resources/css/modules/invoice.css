@@ -503,6 +503,11 @@ html[lang^=en] body {
   float: right;
   margin-left: auto;
 }
+.invoice__table-total-in-words td {
+  font-style: italic;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+}
 .invoice__table-total table {
   border-spacing: 0;
   width: 100%;

@@ -73,6 +73,24 @@ block content
           tr.total
             td #{__('invoice.paper.total')}
             td #{saleInvoice.totalFormatted}
+          tr.total-in-words
+            td #{__('invoice.paper.total_in_words')}
+            td(colspan="3") 
+              span#totalInWords
+              script.
+                // Include number-to-words library
+                document.addEventListener('DOMContentLoaded', function() {
+                  const amount = #{saleInvoice.total};
+                  const words = new Intl.NumberFormat('en', {
+                    style: 'unit',
+                    unit: 'currency'
+                  }).formatToParts(amount)
+                    .map(part => part.type === 'currency' ? '' : part.value)
+                    .join('')
+                    .replace(/\s+/g, ' ');
+                  
+                  document.getElementById('totalInWords').textContent = words + ' only';
+                });
           tr.payment-amount
             td #{__('invoice.paper.payment_amount')}
             td #{saleInvoice.paymentAmountFormatted}
